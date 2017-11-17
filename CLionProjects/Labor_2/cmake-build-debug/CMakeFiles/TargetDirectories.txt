@@ -1,0 +1,3 @@
+/home/wilhelm/CLionProjects/Labor_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/wilhelm/CLionProjects/Labor_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/wilhelm/CLionProjects/Labor_2/cmake-build-debug/CMakeFiles/Labor_2.dir
