@@ -68,7 +68,7 @@ int main5V() {
 
 unsigned int fak(unsigned int n);
 
-int main() {
+int main1L() {
 
     for (;;) {
 
@@ -129,35 +129,35 @@ int main2L() {
 //Aufgabe 3 Labor: Annäherung der Zahl Pi
 //Bib: stdlib, stdio,time
 
-int main3L() {
+int main() {
 
     int anz, i, cnt1 = 0, cnt2 = 0;
 
-    double x,y,pi,abw;
+    double x, y, pi, abw;
 
-    const double xm=1., ym=1., r=1.;
+    const double xm = 1., ym = 1., r = 1.;
 
     srand(time(NULL));
 
     printf("Bitte geben Sie eine ganze Zahl ein:");
-    scanf("%d",&anz);
+    scanf("%d", &anz);
 
-    for (i =0; i <= anz; i++) {
+    for (i = 0; i < anz; i++) {
 
         x = gp_zufall(2.0);
         y = gp_zufall(2.0);
 
-        if (circle_check(xm, ym, r, x, y) == -1 || circle_check(xm,ym,r,x,y) == 0) {
+        if (circle_check(xm, ym, r, x, y) == -1 || circle_check(xm, ym, r, x, y) == 0) {
 
             cnt1++;
 
-        }else {
+        } else {
 
             cnt2++;
         }
     }
 
-    pi = (4 * (double) cnt1) /(cnt1 + cnt2);
+    pi = (4 * (double) cnt1) / (cnt1 + cnt2);
 
     abw = 4 * atan(1.0) - pi;
 
@@ -214,7 +214,7 @@ int circle_check(double xm, double ym, double r, double x, double y) {
 
     double m = distance(xm, ym, x, y);
 
-    if(m<r){
+    if (m < r) {
 
 
         return -1;
@@ -224,7 +224,7 @@ int circle_check(double xm, double ym, double r, double x, double y) {
 
         return 1;
     }
-    if (m ==r) {
+    if (m == r) {
 
 
         return 0;

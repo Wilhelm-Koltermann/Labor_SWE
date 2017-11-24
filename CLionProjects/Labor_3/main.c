@@ -6,9 +6,6 @@
 //Aufgabe1:Winkel und Seiten eines Dreickes nach Kosinus- und Sinussatz
 //Bib: stdio,math
 
-double rad(double grad);
-
-double grad(double rad);
 
 void triangle_1(double a, double b, double gamma, double *c, double *alpha, double *beta);
 
@@ -25,21 +22,22 @@ int main1V() {
         printf("Dreieck %d: Bitte a, b und gamma eingeben:", i);
         scanf("%lf %lf %lf", &a, &b, &gamma);
 
-        gamma = rad(gamma);
-
-
         triangle_1(a, b, gamma, &c, &alpha, &beta);
 
-        printf("--> a,b,c: %.1lf %.1lf %.1lf; gegenueber liegende Winkel: %.1lf %.1lf %.1lf\n", a, b, c, grad(alpha),
-               grad(beta), grad(gamma));
+        printf("--> a,b,c: %.1lf %.1lf %.1lf; gegenueber liegende Winkel: %.1lf %.1lf %.1lf\n", a, b, c, alpha, beta, gamma);
 
 
     }
 
+    printf("\nEnde des Programms keine - weiteren Eingaben erforderlich");
+
+    return 0;
 }
 
 
 //Aufgabe 2: Ausgabe von Zufallszahlen und Berechnung ihres Mittelwertes
+//Bib stdllib,stdio
+
 
 double gp_zufall(double dmax);
 
@@ -47,7 +45,7 @@ double mittelwert(double dFeld[], int iAnz);
 
 int main2V() {
 
-    int iAnz;
+    int iAnz,i;
     double dfeld[1000];
 
     srand(123);
@@ -58,13 +56,23 @@ int main2V() {
         printf("Bitte Anzahl eingeben:");
         scanf("%d", &iAnz);
 
-        printf("Die %d Zufallswerte lauten:\n", iAnz);
 
         if (iAnz > 0) {
 
-            if (iAnz < 1000) {
+            if (iAnz < 10001) {
 
-                mittelwert(dfeld, iAnz);
+                printf("Die %d Zufallswerte lauten:\n", iAnz);
+
+                for(i=0; i<iAnz;i++) {
+
+                    dfeld[i] = gp_zufall(100.);
+
+                    printf("%d: %lf\n", i + 1, dfeld[i]);
+
+                }
+
+                printf("Mittelwerte: %lf\n", mittelwert(dfeld, iAnz));
+
 
             } else {
 
@@ -73,7 +81,7 @@ int main2V() {
 
         } else {
 
-            printf("Programm-Ende: ungueltige Anzahl eingegeben\n");
+            printf("\nProgramm-Ende: ungueltige Anzahl eingegeben");
 
             return 0;
         }
@@ -92,7 +100,7 @@ void change_sequence_2(char f[]);
 
 int main4V() {
 
-    char f[] = {"Wilhelm"};
+    char f[] = {"Ich heisse peter"};
 
     change_sequence_2(f);
 
@@ -106,10 +114,10 @@ int main4V() {
 
 void change_sequence_1(char *F);
 
-void tausche_2(char *c1, char *c2);
+void tausche_1(char cFeld[], int idx1, int idx2);
 
 
-int main() {
+int main5V() {
 
     char f[100];
 
@@ -120,29 +128,35 @@ int main() {
 
         fflush(stdin);
 
-        printf("Bitte geben einen String ein:");
+        printf("Bitte geben Sie einen String ein:");
 
         fgets(f, 100, stdin);
 
         ilang = strlen(f);
 
+
         f[ilang - 1] = 0;
 
-        if ((ilang - 1) == 0) {
 
-            printf("Programmende");
+        if (ilang  > 1) {
+
+            printf("Eingegebener String: %s\n", f);
+
+            change_sequence_1(f);
+
+            printf("Umgedrehter String: %s\n", f);
+
+        } else {
+
+            printf("\nProgrammende\n");
 
             return 0;
+
         }
-
-        printf("Eingegebener String: %s\n", f, ilang);
-
-        change_sequence_1(f);
-
-        printf("%s\n", f);
     }
 
 }
+
 
 
 //Funktionen
@@ -153,7 +167,6 @@ double rad(double grad) {
 
     return (grad / 45.) * atan(1.);
 }
-
 //Funktion Aufgabe 1 Vorbereitung: Bogenmaß --> Gradmaß
 
 double grad(double rad) {
@@ -165,12 +178,27 @@ double grad(double rad) {
 
 void triangle_1(double a, double b, double gamma, double *c, double *alpha, double *beta) {
 
+    double *p;
+
+    p=&gamma;
+
+    *p=rad(gamma);
+
+    *alpha=rad(*alpha);
+
+    *beta=rad(*beta);
 
     *c = sqrt((pow(a, 2) + pow(b, 2)) - (2 * a * b * cos(gamma)));
 
     *alpha = asin((sin(gamma) * a) / (*c));
 
     *beta = M_PI - (*alpha + gamma);
+
+    *alpha=grad(*alpha);
+
+    *beta=grad(*beta);
+
+    *p=grad(gamma);
 }
 
 //Funktion Aufgabe 2 Vorbereitung: gp_zufall aus Vorbereitung 2
@@ -186,18 +214,16 @@ double gp_zufall(double dmax) {
 double mittelwert(double dFeld[], int iAnz) {
 
     int i;
-    double sum = 0;
+    double sum;
 
-    for (i = 0; i <= iAnz - 1; i++) {
 
-        dFeld[i] = gp_zufall(100.);
 
-        sum = sum + dFeld[i];
+    for (i = 0; i < iAnz ; i++) {
 
-        printf("%d: %lf\n", i + 1, dFeld[i]);
+        sum += dFeld[i];
     }
 
-    printf("Der Mittelwert beträgt: %lf\n", sum / iAnz);
+    return sum/iAnz;
 }
 
 
