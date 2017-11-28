@@ -203,7 +203,7 @@ int main1L() {
 
 double standard_abw(double dFeld[], int anz, double mwert);
 
-int main2L() {
+int main() {
 
     int iAnz, i;
 
@@ -228,7 +228,7 @@ int main2L() {
 
                     dfeld[i] = gp_zufall(100.);
 
-                    printf("%d: %lf\n", i + 1, dfeld[i]);
+                    //printf("%d: %lf\n", i + 1, dfeld[i]);
 
                 }
 
@@ -262,7 +262,7 @@ int main2L() {
 
 void decode_string(char str[]);
 
-int main() {
+int main3L() {
 
     char f[100];
 
@@ -494,11 +494,11 @@ void decode_string(char str[]) {
 
         } else {
 
-            Index1 = ((int) str[i]) - 0x20;
+            Index1 = (int) str[i] - 0x20;
 
             Index2 = Decode[Index1];
 
-            str[i] = (char) (Index2 + 0x20);
+            str[i] = (char)(Index2 + 0x20);
 
         }
 
