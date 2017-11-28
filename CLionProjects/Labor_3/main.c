@@ -27,7 +27,8 @@ int main1V() {
 
         triangle_1(a, b, gamma, &c, &alpha, &beta);
 
-        printf("--> a,b,c: %.1lf %.1lf %.1lf; gegenueber liegende Winkel: %.1lf %.1lf %.1lf\n", a, b, c, alpha, beta, gamma);
+        printf("--> a,b,c: %.1lf %.1lf %.1lf; gegenueber liegende Winkel: %.1lf %.1lf %.1lf\n", a, b, c, alpha, beta,
+               gamma);
 
 
     }
@@ -48,7 +49,7 @@ double mittelwert(double dFeld[], int iAnz);
 
 int main2V() {
 
-    int iAnz,i;
+    int iAnz, i;
     double dfeld[1000];
 
     srand(123);
@@ -66,7 +67,7 @@ int main2V() {
 
                 printf("Die %d Zufallswerte lauten:\n", iAnz);
 
-                for(i=0; i<iAnz;i++) {
+                for (i = 0; i < iAnz; i++) {
 
                     dfeld[i] = gp_zufall(100.);
 
@@ -141,7 +142,7 @@ int main5V() {
         f[ilang - 1] = 0;
 
 
-        if (ilang  > 1) {
+        if (ilang > 1) {
 
             printf("Eingegebener String: %s\n", f);
 
@@ -165,13 +166,15 @@ int main5V() {
 //Aufgabe 1: Dreiecksberechnungen wenn alle Seiten gegeben
 
 double rad(double grad);
+
 double grad(double rad);
-void triangle_2(double a, double b, double c, double *alpha, double *beta, double *gamma, double *A, double*R);
+
+void triangle_2(double a, double b, double c, double *alpha, double *beta, double *gamma, double *A, double *R);
 
 int main1L() {
 
     int i, anz;
-    double a, b, c, alpha, beta, gamma,A,R;
+    double a, b, c, alpha, beta, gamma, A, R;
 
     printf("Wie viele Dreiecke sollen berechnet werden?");
     scanf("%d", &anz);
@@ -181,9 +184,10 @@ int main1L() {
         printf("Dreieck %d: Bitte a, b,c eingeben:", i);
         scanf("%lf %lf %lf", &a, &b, &c);
 
-        triangle_2(a, b,c, &alpha, &beta, &gamma, &A, &R);
+        triangle_2(a, b, c, &alpha, &beta, &gamma, &A, &R);
 
-        printf("--> a,b,c: %.1lf %.1lf %.1lf; gegenueber liegende Winkel: %.1lf %.1lf %.1lf\n", a, b, c, alpha, beta, gamma);
+        printf("--> a,b,c: %.1lf %.1lf %.1lf; gegenueber liegende Winkel: %.1lf %.1lf %.1lf\n", a, b, c, alpha, beta,
+               gamma);
 
         printf("\n---> Flaeche: %lf; Radius d. Umkreises: %lf\n", A, R);
 
@@ -199,11 +203,11 @@ int main1L() {
 
 double standard_abw(double dFeld[], int anz, double mwert);
 
-int main() {
+int main2L() {
 
     int iAnz, i;
 
-    double dfeld[1000],mwert;
+    double dfeld[1000], mwert;
 
     srand(123);
 
@@ -220,7 +224,7 @@ int main() {
 
                 printf("Es wurden %d Zufallszahlen erzeugt:\n", iAnz);
 
-                for (i = 0; i<iAnz; i++) {
+                for (i = 0; i < iAnz; i++) {
 
                     dfeld[i] = gp_zufall(100.);
 
@@ -228,21 +232,19 @@ int main() {
 
                 }
 
-                mwert=mittelwert(dfeld, iAnz);
+                mwert = mittelwert(dfeld, iAnz);
 
                 printf("Der Mittelwert betraegt: %lf\n", mwert);
 
-                printf("Die Standardabweichung betraegt: %lf\n", standard_abw(dfeld,iAnz,mwert));
+                printf("Die Standardabweichung betraegt: %lf\n", standard_abw(dfeld, iAnz, mwert));
 
 
-            }
-            else {
+            } else {
 
                 printf("maximal mögliche Anzahl ist 1000\n");
             }
 
-        }
-        else {
+        } else {
 
             printf("\nProgramm-Ende: ungueltige Anzahl eingegeben");
 
@@ -251,6 +253,37 @@ int main() {
 
 
     }
+
+
+}
+
+
+//Aufgabe 3: Decoding
+
+void decode_string(char str[]);
+
+int main() {
+
+    char f[100];
+
+    int ilang;
+
+
+    fflush(stdin);
+
+    printf("Bitte geben Sie einen String ein:");
+
+    fgets(f, 100, stdin);
+
+    ilang = strlen(f);
+
+    f[ilang - 1] = 0;
+
+    printf("Eingegebener String: %s\n", f);
+
+    decode_string(f);
+
+    printf("Dekodierter String: %s", f);
 
 
 }
@@ -279,13 +312,13 @@ void triangle_1(double a, double b, double gamma, double *c, double *alpha, doub
 
     double *p;
 
-    p=&gamma;
+    p = &gamma;
 
-    *p=rad(gamma);
+    *p = rad(gamma);
 
-    *alpha=rad(*alpha);
+    *alpha = rad(*alpha);
 
-    *beta=rad(*beta);
+    *beta = rad(*beta);
 
     *c = sqrt((pow(a, 2) + pow(b, 2)) - (2 * a * b * cos(gamma)));
 
@@ -293,11 +326,11 @@ void triangle_1(double a, double b, double gamma, double *c, double *alpha, doub
 
     *beta = M_PI - (*alpha + gamma);
 
-    *alpha=grad(*alpha);
+    *alpha = grad(*alpha);
 
-    *beta=grad(*beta);
+    *beta = grad(*beta);
 
-    *p=grad(gamma);
+    *p = grad(gamma);
 }
 
 //Funktion Aufgabe 2 Vorbereitung: gp_zufall aus Vorbereitung 2
@@ -315,12 +348,12 @@ double mittelwert(double dFeld[], int iAnz) {
 
     double sum;
 
-    for (i = 0; i < iAnz ; i++) {
+    for (i = 0; i < iAnz; i++) {
 
         sum += dFeld[i];
     }
 
-    return sum/iAnz;
+    return sum / iAnz;
 }
 
 
@@ -336,8 +369,8 @@ void change_sequence_2(char *f) {
 
     for (i = 0; i < j; i++) {
 
-        c1 = f+i;
-        c2 = f+j;
+        c1 = f + i;
+        c2 = f + j;
 
         tausche_2(c1, c2);
 
@@ -400,18 +433,18 @@ void tausche_1(char cFeld[], int idx1, int idx2) {
 
 //Funktion Aufgabe 1 Labor: triangle_2
 
-void triangle_2(double a, double b, double c, double *alpha, double *beta, double *gamma, double *A, double*R) {
+void triangle_2(double a, double b, double c, double *alpha, double *beta, double *gamma, double *A, double *R) {
 
 
-    *alpha = acos(( (( (pow(b,2) + pow(c,2) )) - pow(a, 2)) / (2 * b*c) ) );
+    *alpha = acos(((((pow(b, 2) + pow(c, 2))) - pow(a, 2)) / (2 * b * c)));
 
-    *beta = asin(b*sin(*alpha) / a);
+    *beta = asin(b * sin(*alpha) / a);
 
-    *gamma= M_PI - (*alpha + *beta);
+    *gamma = M_PI - (*alpha + *beta);
 
-    *A = (a*b*sin(*gamma)) / 2;
+    *A = (a * b * sin(*gamma)) / 2;
 
-    *R = (a*b*c) / (4 * (*A));
+    *R = (a * b * c) / (4 * (*A));
 
     *alpha = grad(*alpha);
 
@@ -421,19 +454,56 @@ void triangle_2(double a, double b, double c, double *alpha, double *beta, doubl
 }
 
 
-//Funktion: Standardabweichung
+//Funktion Aufgabe 2: Standardabweichung
 
 double standard_abw(double dFeld[], int anz, double mwert) {
 
     int i;
 
-    double sum=0.;
+    double sum = 0.;
 
-    for(i=0; i < anz; i++) {
+    for (i = 0; i < anz; i++) {
 
-        sum += pow((dFeld[i]-mwert),2);
+        sum += pow((dFeld[i] - mwert), 2);
     }
 
-    return sqrt((sum/(double)(anz-1)));
+    return sqrt((sum / (double) (anz - 1)));
+
+}
+
+
+//Funktion Aufgabe 3: decode string
+
+void decode_string(char str[]) {
+
+    int i, Index1, Index2, Decode[] = {62, 94, 82, 84, 55, 72, 22, 4, 59, 33, 14, 88, 42, 31, 74, 20, 0, 67, 7, 51, 36,
+                                       61, 21, 89, 93, 63, 30, 92, 19, 29, 45, 70, 65, 73, 24, 69, 50, 85, 6, 54, 78,
+                                       83, 44, 76, 90, 57, 56,
+                                       66, 23, 77, 27, 3, 53, 40, 18, 48, 28, 32, 37, 15, 34, 25, 2, 10, 1, 91, 68, 64,
+                                       16, 12, 60, 41, 79, 9,
+                                       8, 52, 49, 13, 11, 81, 71, 5, 46, 38, 58, 26, 47, 80, 86, 43, 87, 39, 75, 17,
+                                       35};
+
+    change_sequence_2(str);
+
+    for (i = 0; i < strlen(str); i++) {
+
+        if ((str[i] < 0x20) || (str[i] > 0x7E)) {
+
+            continue;
+
+        } else {
+
+            Index1 = ((int) str[i]) - 0x20;
+
+            Index2 = Decode[Index1];
+
+            str[i] = (char) (Index2 + 0x20);
+
+        }
+
+
+    }
+
 
 }
