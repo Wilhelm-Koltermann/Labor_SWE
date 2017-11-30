@@ -46,7 +46,7 @@ struct SEGMENT {
 };
 
 
-int main() {
+int main2V() {
 
     struct SEGMENT S;
 
@@ -77,12 +77,67 @@ int main() {
     return 0;
 }
 
+//Aufgabe 3: Aufgabe 2 auf andere Weise
+
+void read_segment_v2(struct SEGMENT *s);
+
+void calculate_segment_v2(struct SEGMENT *s);
+
+int main3V() {
+
+    struct SEGMENT S;
+
+    char c;
+
+    double l;
+
+    while (1) {
+
+
+        printf("Bitte # eingeben fuer Programmende: ");
+
+        fflush(stdin);
+
+        scanf("%c", &c);
+
+        if (c == '#') break;
+
+        read_segment_v2(&S);
+
+        calculate_segment_v2(&S);
+
+        print_segment(S);
+    }
+
+    printf("\nEnde des Programms\n");
+
+    return 0;
+}
+
+//Aufgabe 5:
+
+void set_flag_v1(unsigned int flag_number, void *adr);
+
+void clear_flag_v1(unsigned int flag_number, void *adr);
+
+int test_flag_v1(unsigned int flag_number, void *adr);
+
+
+int main(){
+
+    char f[1000000];
+
+    int NMAX= 8*sizeof(f);
+}
+
+
+
 //Funktionen
 
 //Funktion grad aus Versuch 3
 
-double grad (double rad) {
-    return (rad*45.) / atan(1.);
+double grad(double rad) {
+    return (rad * 45.) / atan(1.);
 }
 
 //Funktion Aufgabe 1 Vorbereitung: Entfernung zweier Punkte
@@ -141,16 +196,83 @@ struct SEGMENT read_segment_v1() {
 
 struct SEGMENT calculate_segment_v1(struct SEGMENT s) {
 
-    double x,y;
+    double x, y;
 
-    x=s.p2.x - s.p1.x;
+    x = s.p2.x - s.p1.x;
 
-    y=s.p2.y - s.p1.y;
+    y = s.p2.y - s.p1.y;
 
-    s.length = distance_of_points(s.p1,s.p2);
+    s.length = distance_of_points(s.p1, s.p2);
 
-    s.angle= grad(atan2(y,x));
+    s.angle = grad(atan2(y, x));
 
     return s;
 
+}
+
+//Funktion Aufgabe 3: read_segment_v2
+
+void read_segment_v2(struct SEGMENT *s) {
+
+    printf(">> Bitte Koordinaten x,y des ersten"
+                   " Punktes der Strecke eingeben: ");
+
+    scanf("%lf %lf", &s->p1.x, &s->p1.y);
+
+    printf(">> Bitte Koordinaten x,y des zweiten"
+                   " Punktes der Strecke eingeben: ");
+
+    scanf("%lf %lf", &s->p2.x, &s->p2.y);
+
+
+}
+
+//Funktion Aufgabe 3: calculate_segment_v2
+
+void calculate_segment_v2(struct SEGMENT *s) {
+
+    double x, y;
+
+    x = (s->p2.x) - (s->p1.x);
+
+    y = (s->p2.y) - (s->p1.y);
+
+    s->length = distance_of_points(s->p1, s->p2);
+
+    s->angle = grad(atan2(y, x));
+
+}
+
+
+//Funktion Aufgabe 5: set_flag
+
+void set_flag_v1(unsigned int flag_number, void *adr) {
+    char *pc = (char *) adr; // Zeiger-Konvertierung
+
+    pc[flag_number - 1] = 1;
+}
+
+//Funktion 5: clear_flag
+
+void clear_flag_v1(unsigned int flag_number, void *adr) {
+    char *pc = (char *) adr; // Zeiger-Konvertierung
+
+    pc[flag_number - 1] = 0;
+}
+
+//Funktion: test_flag
+
+int test_flag_v1(unsigned int flag_number, void *adr) {
+
+    char *pc = (char *) adr; // Zeiger-Konvertierung
+
+    if (pc[flag_number - 1]) {
+
+
+        return 1;
+
+    } else {
+
+        return 0;
+    }
 }

@@ -159,7 +159,7 @@ int main() {
 
     pi = (4 * (double) cnt1) / (cnt1 + cnt2);
 
-    abw = 4 * atan(1.0) - pi;
+    abw = fabs(4 * atan(1.0) - pi);
 
     printf("pi angenähert=%.10lf\nAbweichung=%g\n", pi, abw);
 

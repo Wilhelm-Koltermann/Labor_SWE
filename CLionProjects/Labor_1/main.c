@@ -271,10 +271,15 @@ int main() {
             printf("Die Wurfhöhe beträgt %.2f\n", (pow(v, 2) * pow(sin(alpha), 2)) /( 2 * g));
 
         } else {
+
             printf("ungueltige Eingabe");
+
             return 0;
         }
 
 
     }
 }
+
+
+

@@ -171,7 +171,7 @@ double grad(double rad);
 
 void triangle_2(double a, double b, double c, double *alpha, double *beta, double *gamma, double *A, double *R);
 
-int main() {
+int main1L() {
 
     int i, anz;
     double a, b, c, alpha, beta, gamma, A, R;
@@ -262,7 +262,7 @@ int main2L() {
 
 void decode_string(char str[]);
 
-int main3L() {
+int main() {
 
     char f[100];
 
@@ -284,7 +284,6 @@ int main3L() {
     decode_string(f);
 
     printf("Dekodierter String: %s", f);
-
 
 }
 
@@ -488,19 +487,20 @@ void decode_string(char str[]) {
 
     for (i = 0; i < strlen(str); i++) {
 
-        if ((str[i] < 0x20) || (str[i] > 0x7E)) {
 
-            continue;
+            if ((str[i] < 0x20) || (str[i] > 0x7E)) {
 
-        } else {
+                continue;
 
-            Index1 = (int) str[i] - 0x20;
+            } else {
 
-            Index2 = Decode[Index1];
+                Index1 = (int) str[i] - 0x20;
 
-            str[i] = (char)(Index2 + 0x20);
+                Index2 = Decode[Index1];
 
-        }
+                str[i] = (char) (Index2 + 0x20);
+
+            }
 
 
     }
