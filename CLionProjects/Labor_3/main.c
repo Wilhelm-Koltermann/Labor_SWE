@@ -203,7 +203,7 @@ int main1L() {
 
 double standard_abw(double dFeld[], int anz, double mwert);
 
-int main2L() {
+int main() {
 
     int iAnz, i;
 
@@ -220,7 +220,7 @@ int main2L() {
 
         if (iAnz > 1) {
 
-            if (iAnz < 10001) {
+            if (iAnz < 1001) {
 
                 printf("Es wurden %d Zufallszahlen erzeugt:\n", iAnz);
 
@@ -262,12 +262,11 @@ int main2L() {
 
 void decode_string(char str[]);
 
-int main() {
+int main3L() {
 
     char f[100];
 
     int ilang;
-
 
     fflush(stdin);
 
@@ -345,7 +344,7 @@ double mittelwert(double dFeld[], int iAnz) {
 
     int i;
 
-    double sum;
+    double sum=0.;
 
     for (i = 0; i < iAnz; i++) {
 

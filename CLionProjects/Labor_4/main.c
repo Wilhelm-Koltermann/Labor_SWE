@@ -123,12 +123,59 @@ void clear_flag_v1(unsigned int flag_number, void *adr);
 int test_flag_v1(unsigned int flag_number, void *adr);
 
 
-int main(){
+int main() {
 
     char f[1000000];
 
-    int NMAX= 8*sizeof(f);
+    int NMAX = 8 * sizeof(f);
+
+    unsigned int n, i;
+
+    void *gp;
+
+    gp = f;
+
+
+    while (1) {
+
+        printf("Bitte geben Sie eine ganze positive Zahl ein: ");
+        scanf("%u", &n);
+
+        if (n == 0) {
+
+            printf("Programmende");
+
+            return 0;
+        }
+
+        if (n <= NMAX) {
+
+            i = 1;
+
+            while (i<=n) {
+
+                set_flag_v1(i, gp);
+
+                i++;
+            }
+
+            i=2;
+
+
+
+
+
+        }else{
+
+            continue;
+
+
+        }
+
+
+    }
 }
+
 
 
 
