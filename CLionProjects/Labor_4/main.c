@@ -57,9 +57,9 @@ int main2V() {
     while (1) {
 
 
-        printf("Bitte # eingeben fuer Programmende: ");
+        printf("Bitte # eingeben fuer Programmende:");
 
-        fflush(stdin);
+        //fflush(stdout);
 
         scanf("%c", &c);
 
@@ -114,7 +114,7 @@ int main3V() {
     return 0;
 }
 
-//Aufgabe 5:
+//Aufgabe 5: Sieb des Erathosthenes
 
 void set_flag_v1(unsigned int flag_number, void *adr);
 
@@ -123,59 +123,123 @@ void clear_flag_v1(unsigned int flag_number, void *adr);
 int test_flag_v1(unsigned int flag_number, void *adr);
 
 
-int main() {
+int main5V() {
 
     char f[1000000];
 
-    int NMAX = 8 * sizeof(f);
+    int NMAX = sizeof(f), t,ct=0;
 
-    unsigned int n, i;
-
-    void *gp;
-
-    gp = f;
-
+    unsigned int n, i, j;
 
     while (1) {
 
-        printf("Bitte geben Sie eine ganze positive Zahl ein: ");
+        printf("Bitte geben eine positive ganze Zahl eingeben:");
         scanf("%u", &n);
 
         if (n == 0) {
 
-            printf("Programmende");
+            printf("\nProgrammende!");
 
             return 0;
-        }
 
-        if (n <= NMAX) {
+        } else {
 
-            i = 1;
+            if (n <= NMAX) {
 
-            while (i<=n) {
+                i = 1;
 
-                set_flag_v1(i, gp);
+                while (i <= n) {
 
-                i++;
+                    set_flag_v1(i, f);
+
+                    i++;
+                }
+
+                i = 2;
+
+                while (i <= n) {
+
+                    j = 2;
+
+                    while (j <= (n / i)) {
+
+                        clear_flag_v1(i * j, f);
+
+                        j++;
+                    }
+
+                    i++;
+                }
+
+                i = 2;
+
+                while (i <= n) {
+
+                    t = test_flag_v1(i, f);
+
+                    if (t == 1) {
+
+                        printf("%d ist eine Primzahl\n", i);
+
+                        ct++;
+
+                        i++;
+
+                    } else {
+
+                        i++;
+                    }
+                }
+
+                continue;
+
+
+            } else {
+
+                continue;
             }
 
-            i=2;
-
-
-
-
-
-        }else{
-
-            continue;
-
-
         }
-
-
     }
+
 }
 
+
+//Aufgabe 6:
+
+void print_pixel(unsigned int pixel_number, void *adr);
+
+void toggle_pixel_v2(unsigned int pixel_number, void *adr);
+
+
+
+
+int main() {
+
+    int i;
+
+    int iFeld[] = {0, 536870912, 949880764, 1109556263, -1874190200,
+                   -1138670526, 658023144, -2008938372, 1108609568,
+                   129884292, 1172389022, 8, 0, 0};
+
+    for (i=1; i<=420; i++) {
+
+        print_pixel(i, iFeld);
+
+        if (i%60 == 0) printf("\n");
+    }
+
+    for (i=1; i<=420; i++) toggle_pixel_v2(i, iFeld);
+
+    for (i=1; i<=420; i++) {
+
+        print_pixel(i, iFeld);
+
+        if (i%60 == 0) printf("\n");
+    }
+
+    return 0;
+}
 
 
 
@@ -322,4 +386,41 @@ int test_flag_v1(unsigned int flag_number, void *adr) {
 
         return 0;
     }
+}
+
+
+//Funktion: printf_pixel
+
+void print_pixel(unsigned int pixel_number, void *adr) {
+
+    char *pc = (char *)adr;
+
+    int ioff = (pixel_number-1) / 8;
+
+    int ibit = (pixel_number-1) % 8;
+
+    if ( pc[ioff] & (1<<ibit) ) {
+
+
+        printf("#");
+    }
+
+    else {
+
+        printf(" ");
+
+    }
+}
+
+//Funktion toggle_pixel_v1
+
+void toggle_pixel_v2(unsigned int pixel_number, void *adr) {
+
+    char *pc = (char *)adr;
+
+    int ioff = (pixel_number-1) / 8;
+
+    int ibit = (pixel_number-1) % 8;
+
+    pc[ioff] ^= (1<<ibit);
 }
