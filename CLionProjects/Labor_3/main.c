@@ -171,7 +171,7 @@ double grad(double rad);
 
 void triangle_2(double a, double b, double c, double *alpha, double *beta, double *gamma, double *A, double *R);
 
-int main1L() {
+int main() {
 
     int i, anz;
     double a, b, c, alpha, beta, gamma, A, R;
@@ -203,7 +203,7 @@ int main1L() {
 
 double standard_abw(double dFeld[], int anz, double mwert);
 
-int main() {
+int main2L() {
 
     int iAnz, i;
 

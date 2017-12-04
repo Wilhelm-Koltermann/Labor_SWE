@@ -124,7 +124,7 @@ int main23() {
 
     pi = (4 * (double) cnt1) / (cnt1 + cnt2);
 
-    abw = 4 * atan(1.0) - pi;
+    abw = fabs(4 * atan(1.0) - pi);
 
     printf("pi angenähert=%.10lf\nAbweichung=%g\n", pi, abw);
 
@@ -159,15 +159,13 @@ int main32() {
 
         if (iAnz > 1) {
 
-            if (iAnz < 10001) {
+            if (iAnz < 1001) {
 
                 printf("Es wurden %d Zufallszahlen erzeugt:\n", iAnz);
 
                 for (i = 0; i < iAnz; i++) {
 
                     dfeld[i] = gp_zufall(100.);
-
-                    //printf("%d: %lf\n", i + 1, dfeld[i]);
 
                 }
 
@@ -204,7 +202,9 @@ void decode_string(char str[]);
 
 void change_sequence_2(char *f);
 
-int main() {
+void tausche_2(char *c1, char *c2);
+
+int main33() {
 
     char f[100];
 
@@ -288,7 +288,7 @@ double mittelwert(double dFeld[], int iAnz) {
 
     int i;
 
-    double sum;
+    double sum=0.;
 
     for (i = 0; i < iAnz; i++) {
 
