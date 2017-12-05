@@ -261,40 +261,39 @@ struct TRIANGLE {
     int typ;
 };
 
-void print_triangle (struct TRIANGLE *t);
+void print_triangle(struct TRIANGLE *t);
 
 void read_triangle(struct TRIANGLE *t);
 
-void calculate_triangle (struct TRIANGLE *t);
+void calculate_triangle(struct TRIANGLE *t);
 
-void triple_sort (double *l1l1, double *ll11, double *l11l);
+void triple_sort(double *l1l1, double *ll11, double *l11l);
 
-void main1L()
-{
+void main1L() {
     struct TRIANGLE T;
 
     char c;
 
     while (1) {
 
-        printf ("Bitte # eingeben fuer Programmende: ");
+        printf("Bitte # eingeben fuer Programmende: ");
 
-        fflush (stdin);
+        fflush(stdin);
 
-        scanf("%c",&c);
+        scanf("%c", &c);
 
-        if (c=='#') {
+        if (c == '#') {
 
             break;
         }
 
-        fflush (stdin);
+        fflush(stdin);
 
-        read_triangle (&T);
+        read_triangle(&T);
 
-        calculate_triangle (&T);
+        calculate_triangle(&T);
 
-        print_triangle (&T);
+        print_triangle(&T);
     }
 
     printf("Ende des Programms\n");
@@ -304,7 +303,7 @@ void main1L()
 //Aufgabe 2: Sieb des Erathostenes mit malloc
 
 
-int main() {
+int main2L() {
 
     int t;
 
@@ -316,26 +315,23 @@ int main() {
 
     while (1) {
 
-        printf("\nBitte geben Sie eine positive ganze Zahl eingeben:");
+        printf("\nBitte geben Sie eine positive ganze Zahl ein:");
         scanf("%u", &n);
 
-        printf("Es werden %d Bytes vom Betriebssystem angefordert.\n", (unsigned int) sizeof(unsigned int)*n);
+        printf("Es werden %d Bytes vom Betriebssystem angefordert.\n", (int) sizeof(char) * n);
 
-        f= malloc(n*sizeof(unsigned int));
+        f = malloc(n * sizeof(char));
 
-        if(f==NULL){
+        if (f == NULL) {
 
             printf("Neuen Wert für Obergrenze eingeben\n");
 
             continue;
-        }
-
-        else{
+        } else {
 
 
             printf("Allokation erfolgreich\n");
         }
-
 
 
         if (n == 0) {
@@ -346,13 +342,13 @@ int main() {
 
         } else {
 
-            if (n <= sizeof(unsigned int)*n) {
+            if (n <= sizeof(unsigned int) * n) {
 
                 i = 1;
 
                 while (i <= n) {
 
-                    set_flag_v1(i,f);
+                    set_flag_v1(i, f);
 
                     i++;
                 }
@@ -375,34 +371,161 @@ int main() {
 
                 i = 2;
 
-                while (i <= n) {
+                printf("Bitte s für Ausgabe eingeben:");
 
-                    t = test_flag_v1(i, f);
+                fflush(stdin);
 
-                    if (t == 1) {
+                scanf("%c", &c);
 
-                        printf("Bitte s für Ausgabe eingeben:");
+                if (c == 's') {
 
-                        fflush(stdin);
 
-                        scanf("%c",&c);
+                    while (i <= n) {
 
-                        if(c=='s') {
+                        t = test_flag_v1(i, f);
 
-                            printf("%d ist eine Primzahl\t", i);
+                        if (t == 1) {
+
+
+                            printf(" %d ist eine Primzahl\t", i);
+
+                            i++;
+
+
+                        } else {
 
                             i++;
                         }
-
-                    } else {
-
-                        i++;
                     }
+
+                    free(f);
+
+                    continue;
                 }
 
-                free(f);
+
+            } else {
 
                 continue;
+            }
+
+        }
+    }
+
+}
+
+
+
+//Aufgabe 3: Sieb des Erathostenes mit Bit-Shift
+
+void set_flag_v2(unsigned int flag_number, void *adr);
+
+void clear_flag_v2(unsigned int flag_number, void *adr);
+
+int test_flag_v2(unsigned int flag_number, void *adr);
+
+int main() {
+
+    int t;
+
+    char c;
+
+    void *f;
+
+    unsigned int n, i, j;
+
+    while (1) {
+
+        printf("\nBitte geben Sie eine positive ganze Zahl ein:");
+        scanf("%u", &n);
+
+        printf("Es werden %d Bytes vom Betriebssystem angefordert.\n", (int) sizeof(char) * ((n + 7) / 8));
+
+        f = malloc(((n + 7) / 8) * sizeof(char));
+
+        if (f == NULL) {
+
+            printf("Neuen Wert für Obergrenze eingeben\n");
+
+            continue;
+
+        } else {
+
+
+            printf("Allokation erfolgreich\n");
+        }
+
+
+        if (n == 0) {
+
+            printf("\nProgrammende!");
+
+            return 0;
+
+        } else {
+
+            if (n <= 8*(sizeof(char) * ((n+7)/8))) {
+
+
+
+                i = 1;
+
+                while (i <= n) {
+
+                    set_flag_v2(i, f);
+
+                    i++;
+                }
+
+                i = 2;
+
+                while (i <= n) {
+
+                    j = 2;
+
+                    while (j <= (n / i)) {
+
+                        clear_flag_v2(i * j, f);
+
+                        j++;
+                    }
+
+                    i++;
+                }
+
+                i = 2;
+
+                printf("Bitte s für Ausgabe eingeben:\n");
+
+                fflush(stdin);
+
+                scanf("%c", &c);
+
+                if (c == 's') {
+
+
+                    while (i <= n) {
+
+                        t = test_flag_v2(i, f);
+
+                        if (t == 1) {
+
+
+                            printf(" %d ist eine Primzahl\t", i);
+
+                            i++;
+
+
+                        } else {
+
+                            i++;
+                        }
+                    }
+
+                    free(f);
+
+                    continue;
+                }
 
 
             } else {
@@ -604,14 +727,13 @@ void toggle_pixel_v2(unsigned int pixel_number, void *adr) {
 
 //Funktion Laboraugabe 1: print_triangle
 
-void print_triangle (struct TRIANGLE *t)
-{
-    printf ( "--> Das Dreick hat die Eckpunkte: "
-                     "(%.2f,%.2f) (%.2f,%.2f) (%.2f,%.2f)\n"
-                     "--> Die Seitenlaengen (laengste zuerst) sind: "
-                     "%.4f %.4f %.4f\n",
-             t->p1.x, t->p1.y, t->p2.x, t->p2.y, t->p3.x, t->p3.y,
-             t->seite_lang, t->seite_mittel, t->seite_kurz
+void print_triangle(struct TRIANGLE *t) {
+    printf("--> Das Dreick hat die Eckpunkte: "
+                   "(%.2f,%.2f) (%.2f,%.2f) (%.2f,%.2f)\n"
+                   "--> Die Seitenlaengen (laengste zuerst) sind: "
+                   "%.4f %.4f %.4f\n",
+           t->p1.x, t->p1.y, t->p2.x, t->p2.y, t->p3.x, t->p3.y,
+           t->seite_lang, t->seite_mittel, t->seite_kurz
     );
     if (t->typ == 1) printf("--> Das Dreieck ist spitzwinklig\n");
     else if (t->typ == 2) printf("--> Das Dreieck ist rechtwinklig\n");
@@ -622,71 +744,147 @@ void print_triangle (struct TRIANGLE *t)
 
 //Funktion Laboraufgabe 1: read_triangle
 
-void read_triangle(struct TRIANGLE *t)
-{
+void read_triangle(struct TRIANGLE *t) {
     printf(">> Bitte Koordinaten x,y des ersten Punktes"
                    " des Dreiecks eingeben: ");
-    scanf ("%lf%lf", &t->p1.x, &t->p1.y);
+    scanf("%lf%lf", &t->p1.x, &t->p1.y);
 
     printf(">> Bitte Koordinaten x,y des zweiten Punktes"
                    " des Dreiecks eingeben: ");
-    scanf ("%lf%lf", &t->p2.x, &t->p2.y);
+    scanf("%lf%lf", &t->p2.x, &t->p2.y);
 
     printf(">> Bitte Koordinaten x,y des dritten Punktes"
                    " des Dreiecks eingeben: ");
-    scanf ("%lf%lf", &t->p3.x, &t->p3.y);
+    scanf("%lf%lf", &t->p3.x, &t->p3.y);
 }
 
 //Funktion Laboraufgabe 1: triple_sort
 
-void triple_sort (double *l1l1, double *ll11, double *l11l)
+void triple_sort(double *l1l1, double *ll11, double *l11l)
 
 /* Diese Funktion erhält als Parameter die Adressen von 3
 double-Variablen. Die 3 double-Werte werden so umsortiert, dass am
 Ende die erste Adresse auf den größten und die 3. Adresse auf den
 kleinsten Wert zeigt */
 
-{double l111; if (*l1l1 < *l11l ) if (*l1l1 < *ll11) if ( *ll11 < *l11l)
-            {l111=*l1l1; *l1l1=*l11l; *l11l=l111;} else {l111=*l1l1; *l1l1=*ll11;
-                *ll11=*l11l; *l11l=l111;} else {l111=*l11l; *l11l=*ll11; *ll11=*l1l1;
-            *l1l1=l111;} else if (*l1l1 < *ll11) {l111=*l1l1; *l1l1=*ll11; *ll11=l111;} else
-    if( *ll11 < *l11l) {l111=*ll11; *ll11=*l11l; *l11l=l111;} else {;} }
+{
+    double l111;
+    if (*l1l1 < *l11l)
+        if (*l1l1 < *ll11)
+            if (*ll11 < *l11l) {
+                l111 = *l1l1;
+                *l1l1 = *l11l;
+                *l11l = l111;
+            }
+            else {
+                l111 = *l1l1;
+                *l1l1 = *ll11;
+                *ll11 = *l11l;
+                *l11l = l111;
+            }
+        else {
+            l111 = *l11l;
+            *l11l = *ll11;
+            *ll11 = *l1l1;
+            *l1l1 = l111;
+        }
+    else if (*l1l1 < *ll11) {
+        l111 = *l1l1;
+        *l1l1 = *ll11;
+        *ll11 = l111;
+    }
+    else if (*ll11 < *l11l) {
+        l111 = *ll11;
+        *ll11 = *l11l;
+        *l11l = l111;
+    }
+    else { ; }
+}
 
 //Funktion Laboraufgabe 1: calculate_triangle
 
-void calculate_triangle (struct TRIANGLE *t){
+void calculate_triangle(struct TRIANGLE *t) {
 
-    double a,b,c,gamma;
+    double a, b, c;
 
-    a=distance_of_points(t->p1,t->p2);
+    a = distance_of_points(t->p1, t->p2);
 
-    b= distance_of_points(t->p1,t->p3);
+    b = distance_of_points(t->p1, t->p3);
 
-    c= distance_of_points(t->p2,t->p3);
+    c = distance_of_points(t->p2, t->p3);
 
-    triple_sort(&c,&b,&a);
+    triple_sort(&c, &b, &a);
 
-    t->seite_lang=c;
+    t->seite_lang = c;
 
-    t->seite_mittel=b;
+    t->seite_mittel = b;
 
-    t->seite_kurz=a;
-
-    //gamma=acos((pow(a,2)+pow(b,2)-pow(c,2))/(2*a*b));
+    t->seite_kurz = a;
 
 
-    if( fabs(c - (sqrt(pow(a,2) + pow(b,2))) <= 1.0e-8 )) {
+    if (fabs(c - (sqrt(pow(a, 2) + pow(b, 2))) <= 1.0e-8)) {
 
-        t->typ=2;
+        t->typ = 2;
     }
 
-    if((pow(a,2)+pow(b,2)-pow(c,2))/(2*a*b) < 0.) {
+    if ((pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a * b) < 0.) {
 
-        t->typ=3;
+        t->typ = 3;
 
-    }else{
+    } else {
 
-        t->typ=1;
+        t->typ = 1;
     }
+
+}
+
+//Funktion Laboraufgabe 3 : setf_lag_v2
+
+void set_flag_v2(unsigned int flag_number, void *adr) {
+
+    char *pc = (char *) adr;
+
+    int ioff = (flag_number - 1) / 8;
+
+    int ibit = (flag_number - 1) % 8;
+
+    pc[ioff] |= (1 << ibit);
+}
+
+
+//Funktion Laboraufgabe 3: clear_flag_v2
+
+void clear_flag_v2(unsigned int flag_number, void *adr) {
+
+    char *pc = (char *) adr;
+
+    int ioff = (flag_number - 1) / 8;
+
+    int ibit = (flag_number - 1) % 8;
+
+    pc[ioff] &= ~(1 << ibit);
+
+
+}
+
+//Funktion Laboraufgabe 3: test_flag_v2
+
+int test_flag_v2(unsigned int flag_number, void *adr) {
+
+    char *pc = (char *) adr;
+
+    int ioff = (flag_number - 1) / 8;
+
+    int ibit = (flag_number - 1) % 8;
+
+    if (pc[ioff] &= (1 << ibit)) {
+
+        return 1;
+
+    } else {
+
+        return 0;
+    }
+
 
 }
