@@ -487,19 +487,19 @@ void decode_string(char str[]) {
     for (i = 0; i < strlen(str); i++) {
 
 
-            if ((str[i] < 0x20) || (str[i] > 0x7E)) {
+        if ((str[i] < 0x20) || (str[i] > 0x7E)) {
 
-                continue;
+            continue;
 
-            } else {
+        } else {
 
-                Index1 = (int) str[i] - 0x20;
+            Index1 = (int) str[i] - 0x20;
 
-                Index2 = Decode[Index1];
+            Index2 = Decode[Index1];
 
-                str[i] = (char) (Index2 + 0x20);
+            str[i] = (char) (Index2 + 0x20);
 
-            }
+        }
 
 
     }

@@ -119,6 +119,11 @@ int main3V() {
 //Aufgabe 5: Sieb des Erathosthenes
 
 
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+
 void set_flag_v1(unsigned int flag_number, void *adr);
 
 void clear_flag_v1(unsigned int flag_number, void *adr);
@@ -132,11 +137,12 @@ int main5V() {
 
     int NMAX = sizeof(f), t;
 
+
     unsigned int n, i, j;
 
     while (1) {
 
-        printf("Bitte geben eine positive ganze Zahl eingeben:");
+        printf("Bitte eine positive ganze Zahl eingeben:");
         scanf("%u", &n);
 
         if (n == 0) {
@@ -184,25 +190,14 @@ int main5V() {
 
                         printf("%d ist eine Primzahl\n", i);
 
-                        i++;
-
-                    } else {
-
-                        i++;
                     }
+
+                    i++;
                 }
-
-                continue;
-
-
-            } else {
-
-                continue;
             }
-
         }
-    }
 
+    }
 }
 
 
@@ -213,7 +208,7 @@ void print_pixel(unsigned int pixel_number, void *adr);
 void toggle_pixel_v2(unsigned int pixel_number, void *adr);
 
 
-int main6V() {
+int main() {
 
     int i;
 
@@ -327,6 +322,7 @@ int main2L() {
             printf("Neuen Wert für Obergrenze eingeben\n");
 
             continue;
+
         } else {
 
 
@@ -342,7 +338,7 @@ int main2L() {
 
         } else {
 
-            if (n <= sizeof(unsigned int) * n) {
+            if (n <= sizeof(char) * n) {
 
                 i = 1;
 
@@ -424,7 +420,7 @@ void clear_flag_v2(unsigned int flag_number, void *adr);
 
 int test_flag_v2(unsigned int flag_number, void *adr);
 
-int main() {
+int main3L() {
 
     int t;
 
@@ -436,12 +432,12 @@ int main() {
 
     while (1) {
 
-        printf("\nBitte geben Sie eine positive ganze Zahl ein:");
+        printf("\nBitte geben Sie positive ganze Zahl ein:");
         scanf("%u", &n);
 
-        printf("Es werden %d Bytes vom Betriebssystem angefordert.\n", (int) sizeof(char) * ((n + 7) / 8));
+        printf("Es werden %d Bytes vom Betriebssystem angefordert.\n",((n + 7) / 8));
 
-        f = malloc(((n + 7) / 8) * sizeof(char));
+        f = malloc(((n + 7) / 8));
 
         if (f == NULL) {
 
@@ -877,9 +873,12 @@ int test_flag_v2(unsigned int flag_number, void *adr) {
 
     int ibit = (flag_number - 1) % 8;
 
-    if (pc[ioff] &= (1 << ibit)) {
+    if (pc[ioff] & (1 << ibit)) {
+
 
         return 1;
+
+
 
     } else {
 

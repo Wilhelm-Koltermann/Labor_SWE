@@ -3,8 +3,6 @@
 #include <time.h>
 #include <math.h>
 
-//Aufgabe 3: Abstand Mittelpunkt & beliebiger Punkt
-//Bib: stdio
 
 //Vorbereitungsaufgaben
 
@@ -229,7 +227,4 @@ int circle_check(double xm, double ym, double r, double x, double y) {
 
         return 0;
     }
-
-
 }
-
