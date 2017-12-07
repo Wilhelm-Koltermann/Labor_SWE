@@ -10,7 +10,7 @@ void print_hex_v1(unsigned int number);
 
 void print_dec_v1(unsigned int number);
 
-int main() {
+int main1V() {
 
     print_dec_v1(0xffffffff);
     putchar('\n');
@@ -39,6 +39,59 @@ int main() {
     putchar('\n');
     putchar('\n');
     return 0;
+}
+
+
+
+//Aufgabe 2: Testprogramm für Fib
+
+unsigned int fib(unsigned int n);
+
+
+int main2V1(){
+
+    printf("%d",fib(5));
+
+
+}
+
+
+
+//Aufgabe 2: Testprogram für fib_v2
+
+int fib_v2(int n);
+
+int call_cnt, level, level_max;
+
+int main() {
+
+    int zahl;
+
+    while (1) {
+
+        printf("Welche Fibonacci-Zahl ist zu berechnen?");
+        scanf("%d", &zahl);
+
+        if (zahl >= 0) {
+
+            call_cnt = level_max = 0;
+
+            printf("Die %d. Fibinnaci-Zahl ist %d\n", zahl, fib_v2(zahl));
+
+            printf("Anzahl der Aufrufe %d\n", call_cnt);
+
+            printf("Anzahl der Hierarchiebenen %d\n", level_max);
+
+
+        } else {
+
+            printf("Programmende");
+
+            return 0;
+        }
+    }
+
+
 }
 
 
@@ -110,3 +163,50 @@ void print_hex_v1(unsigned int number) {
 
 }
 
+
+//Funktion Vorbereitungsaugabe 2: fib
+
+unsigned int fib(unsigned int n) {
+
+        if( n == 0 || n==1) {
+
+            return n;
+        }
+
+        if( n > 1) {
+
+            return fib(n-1)+fib(n-2);
+        }
+
+    }
+
+//Funktion Vorbereitungsaugabe 2: fib_v2
+
+int fib_v2(int n) {
+
+    call_cnt++;
+
+    level++;
+
+    if (level > level_max) {
+
+        level_max = level;
+    }
+
+    int val;
+
+    if (n == 0 || n == 1) {
+
+        level--;
+
+        return n;
+    }
+
+    val = fib_v2(n - 1);
+
+    val += fib_v2(n - 2);
+
+    level--;
+
+    return val;
+}
