@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-//Vorberitungsaufgaben
+//Vorbereitungsaufgaben
 
 //Aufgabe 1: Zahlensysteme
 
@@ -48,22 +48,22 @@ int main1V() {
 unsigned int fib(unsigned int n);
 
 
-int main2V1(){
+int main2V1() {
 
-    printf("%d",fib(5));
+    printf("%d", fib(5));
 
 
 }
 
 
 
-//Aufgabe 2: Testprogram für fib_v2
+//Aufgabe 2: Testprogramm für fib_v2
 
 int fib_v2(int n);
 
 int call_cnt, level, level_max;
 
-int main() {
+int main2v() {
 
     int zahl;
 
@@ -85,7 +85,7 @@ int main() {
 
         } else {
 
-            printf("Programmende");
+            printf("\nProgrammende");
 
             return 0;
         }
@@ -94,9 +94,48 @@ int main() {
 
 }
 
+//Aufgabe 3 Testprogramm für bin_koeff_v1
+
+unsigned int bin_koeff_v1(unsigned int n, unsigned int k);
+
+int main3t() {
+
+    unsigned int n, k;
+
+    printf("Bitte n und k eingeben:");
+    scanf("%u %u", &n, &k);
+
+    printf("\nDer Binomialkoeffizient beträgt: %u\n", bin_koeff_v1(n, k));
+
+
+}
+
+//Aufgabe 3 Testprogramm Pascalsches Dreieck
+
+int main() {
+
+    unsigned int n, k;
+
+    for (n = 0; n < 13; n++) {
+
+        for (k = 0; k <= n; k++) {
+
+            printf("%u\t", bin_koeff_v1(n, k));
+
+            if (n == k) {
+
+                printf("\n");
+            }
+
+        }
+
+
+    }
+}
+
+
 
 //Funktionen:
-
 
 //Funktion Vorbereitungsaufgabe 1: printf_dec_v1
 
@@ -168,19 +207,20 @@ void print_hex_v1(unsigned int number) {
 
 unsigned int fib(unsigned int n) {
 
-        if( n == 0 || n==1) {
+    if (n == 0 || n == 1) {
 
-            return n;
-        }
-
-        if( n > 1) {
-
-            return fib(n-1)+fib(n-2);
-        }
-
+        return n;
     }
 
+    if (n > 1) {
+
+        return fib(n - 1) + fib(n - 2);
+    }
+
+}
+
 //Funktion Vorbereitungsaugabe 2: fib_v2
+
 
 int fib_v2(int n) {
 
@@ -209,4 +249,24 @@ int fib_v2(int n) {
     level--;
 
     return val;
+}
+
+//Funktion Vorbereitungsaufgabe 3: bin_koeff_v1
+
+unsigned int bin_koeff_v1(unsigned int n, unsigned int k) {
+
+    unsigned int BinKoeff = 1, i;
+
+    for (i = 1; i <= k; i++) {
+
+
+        BinKoeff *= (double) (n + 1 - i) / i;
+
+        //printf("%.7f\n",(float) (n + 1 - i) / i);
+
+    }
+
+    return BinKoeff;
+
+
 }
