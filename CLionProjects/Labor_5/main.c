@@ -260,9 +260,7 @@ unsigned int bin_koeff_v1(unsigned int n, unsigned int k) {
     for (i = 1; i <= k; i++) {
 
 
-        BinKoeff *= (double) (n + 1 - i) / i;
-
-        //printf("%.7f\n",(float) (n + 1 - i) / i);
+        BinKoeff = (double) BinKoeff * (double) (n + 1 - i) / i;
 
     }
 
