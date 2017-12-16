@@ -51,7 +51,6 @@ int main2t() {
 
     printf("%d", fib(4));
 
-
 }
 
 
@@ -139,7 +138,7 @@ void print_dec_v2(unsigned int number);
 
 void print_hex_v2(unsigned int number);
 
-int main1L() {
+int main1l() {
 
     print_dec_v2(0xffffffff);
     putchar('\n');
@@ -168,7 +167,7 @@ int main1L() {
 
 int fib_v3(int n);
 
-int main3l() {
+int main2l() {
 
     int zahl;
 
@@ -205,22 +204,22 @@ unsigned int bin_koeff_v2(unsigned int n, unsigned int k);
 
 int main() {
 
-    unsigned int n, k;
+    int n, k;
 
     while (1) {
 
-        if (n < 0 || k < 0) {
+        printf("Bitte Werte für n und k eingeben: ");
+        scanf("%u %u", &n, &k);
+
+        if (n >= 0 && k >= 0) {
+
+            printf("Der Binomialkoeffizient %u über %u ist: %u\n", n, k, bin_koeff_v2((unsigned int) n,(unsigned int) k));
+
+        } else {
 
             printf("Error");
 
             return 0;
-
-        } else {
-
-            printf("Bitte Werte für n und k eingeben: ");
-            scanf("%u %u", &n, &k);
-
-            printf("Der Binomialkoeffizient n über k ist: %u\n", bin_koeff_v2(n, k));
         }
     }
 
@@ -457,29 +456,24 @@ int fib_v3(int n) {
 
 unsigned int bin_koeff_v2(unsigned int n, unsigned int k) {
 
+    unsigned int val;
     int static call_cnt;
     int static level;
-    int static level_max;
 
     call_cnt++;
 
     level++;
 
-    if (level > level_max) { level_max = level;}
-
     printf("---> DEBUG: %d-ter Aufruf mit Parameter n= %u und k = %u "
-                   "auf Ebene %d\n", call_cnt, n, k, level_max);
-
-    unsigned int val;
+                   "auf Ebene %d\n", call_cnt, n, k, level);
 
     if (k == 0 || n == k) { level--; return 1;}
 
+    if (k == 1 || k == n - 1) {level--; return n;}
 
-    if (k == 1 || n == k-1) { level--; return n;}
+    val = bin_koeff_v2(n - 1, k - 1);
 
-    val = bin_koeff_v2(n-1, k-1);
-
-    val += bin_koeff_v2(n-1, k);
+    val += bin_koeff_v2(n - 1, k);
 
     level--;
 
