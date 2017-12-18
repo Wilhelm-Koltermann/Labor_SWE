@@ -47,10 +47,9 @@ int main1V() {
 unsigned int fib(unsigned int n);
 
 
-int main2t() {
+int mainft() {
 
-    printf("%d", fib(4));
-
+    printf("%d", fib(3));
 }
 
 
@@ -138,7 +137,7 @@ void print_dec_v2(unsigned int number);
 
 void print_hex_v2(unsigned int number);
 
-int main1l() {
+int main() {
 
     print_dec_v2(0xffffffff);
     putchar('\n');
@@ -202,7 +201,7 @@ int main2l() {
 
 unsigned int bin_koeff_v2(unsigned int n, unsigned int k);
 
-int main() {
+int main3l() {
 
     int n, k;
 
@@ -297,16 +296,9 @@ void print_hex_v1(unsigned int number) {
 
 unsigned int fib(unsigned int n) {
 
-    if (n == 0 || n == 1) {
+    if (n == 0 || n == 1) return n;
 
-        return n;
-    }
-
-    if (n > 1) {
-
-        return fib(n - 1) + fib(n - 2);
-    }
-
+    if (n > 1) return fib(n - 1) + fib(n - 2);
 }
 
 //Funktion Vorbereitungsaugabe 2: fib_v2
@@ -391,19 +383,9 @@ void print_hex_v2(unsigned int number) {
 
     if (parameter != 0) print_hex_v2(parameter);
 
-    if (digit < 10) putchar(digit + '0');
+    if (digit >= 10) putchar(digit-10 + 'A');
 
-    if (digit == 10) putchar('a');
-
-    if (digit == 11) putchar('b');
-
-    if (digit == 12) putchar('c');
-
-    if (digit == 13) putchar('d');
-
-    if (digit == 14) putchar('e');
-
-    if (digit == 15) putchar('f');
+    else putchar(digit+'0');
 
 }
 
@@ -419,28 +401,17 @@ int fib_v3(int n) {
 
     if (n == -2) return call_cnt;
 
-    if (n == -1) {
-        call_cnt = level_max = 0;
-        return 0;
-    }
+    if (n == -1) { call_cnt = level_max = 0; return 0;}
 
     call_cnt++;
 
     level++;
 
-    if (level > level_max) {
-
-        level_max = level;
-    }
+    if (level > level_max) {level_max = level;}
 
     int val;
 
-    if (n == 0 || n == 1) {
-
-        level--;
-
-        return n;
-    }
+    if (n == 0 || n == 1) {level--; return n;}
 
     val = fib_v3(n - 1);
 
@@ -469,13 +440,22 @@ unsigned int bin_koeff_v2(unsigned int n, unsigned int k) {
 
     if (k == 0 || n == k) { level--; return 1;}
 
-    if (k == 1 || k == n - 1) {level--; return n;}
+    if (k == 1 || k == n - 1) {
+
+        if(call_cnt==1) call_cnt=0;
+
+        level--;
+
+        return n;
+    }
 
     val = bin_koeff_v2(n - 1, k - 1);
 
     val += bin_koeff_v2(n - 1, k);
 
     level--;
+
+    if(level==0) call_cnt=0;
 
     return val;
 }
