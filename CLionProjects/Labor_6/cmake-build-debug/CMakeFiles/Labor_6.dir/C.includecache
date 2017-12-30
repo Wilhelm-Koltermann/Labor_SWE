@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/wilhelm/CLionProjects/Labor_6/main.c
+stdio.h
+-
+screen_transform.h
+/home/wilhelm/CLionProjects/Labor_6/screen_transform.h
+polynom.h
+/home/wilhelm/CLionProjects/Labor_6/polynom.h
+simple_rgb_image.h
+/home/wilhelm/CLionProjects/Labor_6/simple_rgb_image.h
+
+/home/wilhelm/CLionProjects/Labor_6/polynom.h
+stddef.h
+-
+
+/home/wilhelm/CLionProjects/Labor_6/screen_transform.h
+
+/home/wilhelm/CLionProjects/Labor_6/simple_rgb_image.h
+stdio.h
+-
+

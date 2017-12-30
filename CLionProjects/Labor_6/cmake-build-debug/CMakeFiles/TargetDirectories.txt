@@ -1,0 +1,4 @@
+/home/wilhelm/CLionProjects/Labor_6/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/wilhelm/CLionProjects/Labor_6/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/wilhelm/CLionProjects/Labor_6/cmake-build-debug/CMakeFiles/libv6_linux32.a.dir
+/home/wilhelm/CLionProjects/Labor_6/cmake-build-debug/CMakeFiles/Labor_6.dir

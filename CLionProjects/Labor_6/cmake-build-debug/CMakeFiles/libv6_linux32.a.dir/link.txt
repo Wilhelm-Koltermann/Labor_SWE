@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibv6_linux32.a.a  CMakeFiles/libv6_linux32.a.dir/main.c.o
+/usr/bin/ranlib liblibv6_linux32.a.a
