@@ -15,6 +15,10 @@ polynom.h
 /home/wilhelm/CLionProjects/Labor_6/polynom.h
 simple_rgb_image.h
 /home/wilhelm/CLionProjects/Labor_6/simple_rgb_image.h
+stdlib.h
+-
+math.h
+-
 
 /home/wilhelm/CLionProjects/Labor_6/polynom.h
 stddef.h
