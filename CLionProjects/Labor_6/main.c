@@ -9,8 +9,8 @@
 
 double distance(double xm, double ym, double x, double y);
 
-int main(void)
-{
+int main(void) {
+
     simple_rgb_image_t image; /* Bildspeicher */
 
     FILE *file;
@@ -23,9 +23,11 @@ int main(void)
 
 /* Bilddatei zum binaeren Schreiben oeffnen */
 
-    if ( (file = fopen("mein_bild.bmp", "wb")) == NULL) {
+    if ((file = fopen("mein_bild.bmp", "wb")) == NULL) {
 
-        printf("open error\n"); return -1;}
+        printf("open error\n");
+        return -1;
+    }
 
 /* Initialisierung des Bildspeichers */
 
@@ -72,23 +74,23 @@ void simple_rgb_image_init(simple_rgb_image_t *sink, int width, int height) {
 
     sink->data = malloc(3 * width * height);
 
-    if (sink->data == NULL) { printf("Neuen Wert für Obergrenze eingeben\n"); }
+    if (sink->data == NULL) { printf("Error-Allokation fehlgeschlagen\n"); }
 }
 
 //Funktion Vorbereitungsaufgabe 1: Freigabe des Speicherplatzes
 
-void simple_rgb_image_clear(simple_rgb_image_t *sink){
+void simple_rgb_image_clear(simple_rgb_image_t *sink) {
 
     free(sink->data);
 }
 
 //Funktion Vorbereitungsaufgabe 1: Erzeugung der Bilddatei
 
-void simple_rgb_image_to_bitmap_stream(simple_rgb_image_t *source, FILE *stream){
+void simple_rgb_image_to_bitmap_stream(simple_rgb_image_t *source, FILE *stream) {
 
-    int i;
+    int i,c;
 
-    for(i=0;i<= (3*source->width*source->height);i++) {
+    for (i = 0; i <= (3 * source->width * source->height)-1; i++) {
 
         fputc(source->data[i], stream);
     }
@@ -98,28 +100,28 @@ void simple_rgb_image_to_bitmap_stream(simple_rgb_image_t *source, FILE *stream)
 //Funktion Vorbereitungsaufgabe 1: Pixel Färben
 
 void simple_rgb_image_put_pixel(simple_rgb_image_t *sink, int x, int y,
-                                unsigned char red, unsigned char green, unsigned char blue)
-{
+                                unsigned char red, unsigned char green, unsigned char blue) {
 
-    sink->data[x] = red;
-    sink->data[y] = red;
-    sink->data[x+1] = green;
-    sink->data[y+1] = green;
-    sink->data[x+2] = blue;
-    sink->data[y+2] = blue;
+    sink->data[(y * (sink->width) * 3) + (x * 3)] = red;
+
+    sink->data[((y * (sink->width) * 3) + (x * 3)) + 1] = green;
+
+    sink->data[((y * (sink->width) * 3) + (x * 3)) + 2] = blue;
+
 
 }
 
 //Funktion Vorbereitunsgaugabe 1: Linie einzeichnen
 
 void simple_rgb_image_draw_line(simple_rgb_image_t *sink, int x0, int y0, int
-x1, int y1, int width, unsigned char red, unsigned char green, unsigned char blue)
-{
-    int i,j;
+x1, int y1, int width, unsigned char red, unsigned char green, unsigned char blue) {
+    int i, j;
 
-    for(i=x0,j=y0;i<=x1,j<=y1;i=x0++,j=y0++) {
+    for (i = x0, j = y0; i <= x1, j <= y1; i = x0++, j = y0++) {
 
-        simple_rgb_image_put_pixel(sink,i,j+width,red,green,blue);
+        simple_rgb_image_put_pixel(sink, i, j, red, green, blue);
+
+        simple_rgb_image_put_pixel(sink, i, (j + width), red, green, blue);
     }
 }
 
@@ -127,14 +129,14 @@ x1, int y1, int width, unsigned char red, unsigned char green, unsigned char blu
 //Funktion Vorbereitungsaufgabe 1: Kreis zeichnen und ausfüllen
 
 void simple_rgb_image_fill_circle(simple_rgb_image_t *sink, int x, int y, int
-radius, unsigned char red, unsigned char green, unsigned char blue){
+radius, unsigned char red, unsigned char green, unsigned char blue) {
 
-    int i,j;
+    int i, j;
 
-    for(i=0,j=0;i<=sink->height-1,j<=sink->width-1;i++,j++)
+    for (i = 0, j = 0; i <= sink->height - 1, j <= sink->width - 1; i++, j++)
 
-        if(distance(x,y,i,j)<=radius) {simple_rgb_image_put_pixel(sink,i,j,red,green,blue);}
-    }
+        if (distance(x, y, i, j) <= radius) { simple_rgb_image_put_pixel(sink, i, j, red, green, blue); }
+}
 
 
 
