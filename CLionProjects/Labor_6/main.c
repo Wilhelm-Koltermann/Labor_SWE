@@ -26,6 +26,7 @@ int main(void) {
     if ((file = fopen("mein_bild.bmp", "wb")) == NULL) {
 
         printf("open error\n");
+
         return -1;
     }
 
@@ -88,9 +89,9 @@ void simple_rgb_image_clear(simple_rgb_image_t *sink) {
 
 void simple_rgb_image_to_bitmap_stream(simple_rgb_image_t *source, FILE *stream) {
 
-    int i,c;
+    int i;
 
-    for (i = 0; i <= (3 * source->width * source->height)-1; i++) {
+    for (i = 0; i <= (3 * source->width * source->height) - 1; i++) {
 
         fputc(source->data[i], stream);
     }
@@ -115,13 +116,34 @@ void simple_rgb_image_put_pixel(simple_rgb_image_t *sink, int x, int y,
 
 void simple_rgb_image_draw_line(simple_rgb_image_t *sink, int x0, int y0, int
 x1, int y1, int width, unsigned char red, unsigned char green, unsigned char blue) {
-    int i, j;
 
-    for (i = x0, j = y0; i <= x1, j <= y1; i = x0++, j = y0++) {
+    int i, j, k;
 
-        simple_rgb_image_put_pixel(sink, i, j, red, green, blue);
+    if (y0 <= y1) {
 
-        simple_rgb_image_put_pixel(sink, i, (j + width), red, green, blue);
+        for (i = x0, j = y0; i <= x1, j <= y1; i++, j++) {
+
+            for (k = 0; k <= width - 1; k++) {
+
+                if ((j + width) <= sink->height - 1) {
+
+                    simple_rgb_image_put_pixel(sink, i, (j + width), red, green, blue);
+                }
+            }
+        }
+
+    } else {
+
+        for (i = x0, j = y0; i <= x1, j >= y1; i++, j--) {
+
+            for (k = 0; k <= width - 1; k++) {
+
+                if ((j + width) <= sink->height - 1) {
+
+                    simple_rgb_image_put_pixel(sink, i, (j + width), red, green, blue);
+                }
+            }
+        }
     }
 }
 
@@ -141,7 +163,7 @@ radius, unsigned char red, unsigned char green, unsigned char blue) {
 
 
 
-//Funktion Distance: Aufgabe2 Vorbereitung und Labor, Abstand zweier Punkte
+//Funktion Distance: Aufgabe 2 Vorbereitung und Labor, Abstand zweier Punkte
 //Bib:math.h
 
 double distance(double xm, double ym, double x, double y) {
