@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include "screen_transform.h"
+#include "polynom.h"
+#include "simple_rgb_image.h"
+#include <stdlib.h>
+#include <math.h>
+
+void find_min_max(double *min, double *max, double *x, size_t size);
+size_t get_number_of_lines_in_file(FILE *file);
+
+int main(){
+
+  simple_rgb_image_t image;
+  screen_transform_t trans;
+  FILE *file;
+  polynom_t polyn;
+  file = fopen("labor.data","rb");
+  int i,k=0,j=0, image_width = 600, image_height = 800;
+  
+  if(file == NULL) printf("error/n");
+  size_t dnol = get_number_of_lines_in_file(file);
+  double dxval[dnol],dyval[dnol],maxy,maxx,minx,miny; 
+  
+  for(i = 0; i < 2*dnol; i++){
+
+    if(i%2 == 0) { fscanf(file,"%lf",&dxval[k]); k++; }
+
+    else{ fscanf(file,"%lf",&dyval[j]); j++; }
+  }
+
+  find_min_max(&minx,&maxx,dxval,(sizeof(dxval)/8));
+  find_min_max(&miny,&maxy,dyval,(sizeof(dxval)/8));
+
+  
+  screen_transform_set_screen_range_x (&trans, 0, 599);
+  screen_transform_set_screen_range_y (&trans, 0, 799);
+  screen_transform_set_world_range_x (&trans, minx, maxx);
+  screen_transform_set_world_range_y (&trans, miny, maxy);
+
+  
+   
+}
+
+
+//Funktionen
+
+//Min/Max eines Zahlen-Arrays finden
+
+void find_min_max(double *min, double *max, double *x, size_t size){
+size_t i;
+*min = x[0];
+*max = x[0];
+for(i = 1; i < size; ++i){
+if(x[i] < *min){
+*min = x[i];
+}
+if(x[i] > *max){
+*max = x[i];
+}
+}
+}
+
+//Anzhal der Zeilen einer Datei finden
+
+size_t get_number_of_lines_in_file(FILE *file)
+{
+size_t cnt=0;
+char line[1024];
+while (fgets(line, sizeof(line), file) != NULL) cnt++;
+rewind(file);
+return cnt;
+}
